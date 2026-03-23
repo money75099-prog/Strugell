@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noor Fragrances — Luxury Perfumes</title>
+  <meta name="description" content="Handcrafted luxury fragrances with rare ingredients — Discover your signature scent."/>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg: #0f0f0f;
+      --color-bg-dark: #0a0a0a;
+      --color-text: #f5f5f5;
+      --color-text-light: #d1d1d1;
+      --color-gold: #d4af37;
+      --color-gold-dark: #b8972e;
+      --color-rose-gold: #b76e79;
+      --color-border: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .container {
+      width: min(92%, 1400px);
+      margin-inline: auto;
+    }
+
+    /* Header / Nav */
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      transition: background 0.4s ease;
+      background: rgba(10,10,10,0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    header.scrolled {
+      background: rgba(10,10,10,0.92);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: clamp(1.5rem, 5vw, 2.1rem);
+      font-weight: 600;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      cursor: default;
+    }
+
+    .cart-count {
+      background: var(--color-gold);
+      color: #0f0f0f;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Hero */
+    #hero {
+      height: 100vh;
+      min-height: 720px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.75)),
+                  url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=90') center/cover no-repeat fixed;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 9vw, 7.2rem);
+      line-height: 0.92;
+      margin-bottom: 1.4rem;
+      color: white;
+      text-shadow: 0 8px 40px rgba(0,0,0,0.7);
+    }
+
+    .hero p {
+      font-size: clamp(1.25rem, 3vw, 1.55rem);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      color: var(--color-text-light);
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.6rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold);
+      background: transparent;
+      transition: all 0.35s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--color-gold);
+      color: #0f0f0f;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(212,175,55,0.28);
+    }
+
+    /* Section headings */
+    .section-title {
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      text-align: center;
+      margin-bottom: 4rem;
+      background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+
+    /* Products */
+    #products {
+      padding: 10rem 0 8rem;
+      background: linear-gradient(to bottom, #0a0a0a, var(--color-bg-dark) 40%, var(--color-bg));
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem 2rem;
+    }
+
+    .product-card {
+      background: #111;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--color-gold-dark);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    }
+
+    .product-image {
+      height: 380px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.7s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.08);
+    }
+
+    .product-content {
+      padding: 2rem 1.8rem 2.2rem;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 1.65rem;
+      margin-bottom: 0.8rem;
+      color: white;
+    }
+
+    .product-desc {
+      font-size: 0.98rem;
+      color: var(--color-text-light);
+      margin-bottom: 1.4rem;
+      min-height: 3.2em;
+    }
+
+    .notes {
+      font-size: 0.92rem;
+      color: #aaa;
+      margin-bottom: 1.6rem;
+      line-height: 1.7;
+    }
+
+    .notes strong {
+      color: var(--color-gold);
+    }
+
+    .price {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 1.4rem;
+      display: block;
+    }
+
+    .btn-add {
+      border-color: var(--color-gold);
+      background: transparent;
+      color: var(--color-gold);
+      width: 100%;
+      padding: 1rem;
+    }
+
+    .btn-add:hover {
+      background: var(--color-gold);
+      color: #111;
+    }
+
+    /* Features */
+    #features {
+      padding: 8rem 0;
+      background: var(--color-bg-dark);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 3.2rem;
+      margin-bottom: 1.2rem;
+      color: var(--color-gold);
+    }
+
+    .feature-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.9rem;
+      color: white;
+    }
+
+    /* Testimonials */
+    #testimonials {
+      padding: 8rem 0;
+      background: linear-gradient(to bottom, #0a0a0a, var(--color-bg));
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .testimonial {
+      background: #111;
+      padding: 2.2rem;
+      border-left: 3px solid var(--color-gold);
+      border-radius: 4px;
+    }
+
+    .quote {
+      font-style: italic;
+      margin-bottom: 1.4rem;
+      color: #ddd;
+      font-size: 1.05rem;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-gold-dark);
+    }
+
+    .author-name {
+      font-weight: 500;
+      color: white;
+    }
+
+    /* Newsletter */
+    #newsletter {
+      padding: 9rem 0 10rem;
+      text-align: center;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    }
+
+    #newsletter h2 {
+      margin-bottom: 1.8rem;
+    }
+
+    #newsletter p {
+      font-size: 1.25rem;
+      color: var(--color-text-light);
+      margin-bottom: 2.8rem;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input[type="email"] {
+      flex: 1;
+      min-width: 260px;
+      padding: 1rem 1.4rem;
+      background: #111;
+      border: 1px solid #333;
+      color: white;
+      font-size: 1.05rem;
+      border-radius: 0;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.2rem;
+      margin: 1.8rem 0 2.8rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--color-text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-gold);
+    }
+
+    .social {
+      font-size: 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .social a {
+      color: #777;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+
+    .social a:hover {
+      color: var(--color-gold);
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: clamp(3.2rem, 12vw, 5.2rem); }
+      .section-title { font-size: clamp(2.4rem, 8vw, 3.8rem); }
+      nav { padding: 0 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container">
+    <nav>
+      <div class="logo">Noor</div>
+      <div class="cart">
+        <span>Cart</span>
+        <span class="cart-count" id="cart-count">0</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="hero-content fade-in">
+    <h1>Discover Your Signature Scent</h1>
+    <p>Handcrafted luxury fragrances • Made with the finest rare ingredients</p>
+    <a href="#products" class="btn">Shop Collection</a>
+  </div>
+</section>
+
+<section id="products">
+  <div class="container">
+    <h2 class="section-title">Signature Collection</h2>
+
+    <div class="grid">
+
+      <div class="product-card fade-in">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1615634629732-053e6a924101?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=85" alt="Midnight Oud perfume bottle">
+        </div>
+        <div class="product-content">
+          <h3 class="product-name">Midnight Oud</h3>
+          <p class="product-desc">Deep, mysterious oud wrapped in warm amber and spice.</p>
+          <div class="notes">
+            <strong>Top:</strong> Saffron, Cardamom<br>
+            <strong>Heart:</strong> Rose, Oud<br>
+            <strong>Base:</strong> Amber, Sandalwood, Musk
+          </div>
+          <span class="price">$185.00</span>
+          <button class="btn btn-add" data-price="185">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1587017539507-6d1e6d2f4176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=85" alt="Velvet Rose perfume bottle">
+        </div>
+        <div class="product-content">
+          <h3 class="product-name">Velvet Rose</h3>
+          <p class="product-desc">Lush Bulgarian rose softened by creamy vanilla and patchouli.</p>
+          <div class="notes">
+            <strong>Top:</strong> Pink Pepper, Bergamot<br>
+            <strong>Heart:</strong> Damask Rose, Peony<br>
+            <strong>Base:</strong> Vanilla, Patchouli, Musk
+          </div>
+          <span class="price">$165.00</span>
+          <button class="btn btn-add" data-price="165">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1590737098222-8e6b8a92f93d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=85" alt="Saffron Ember perfume bottle">
+        </div>
+        <div class="product-content">
+          <h3 class="product-name">Saffron Ember</h3>
+          <p class="product-desc">Warm saffron and incense with smoky woods and leather.</p>
+          <div class="notes">
+            <strong>Top:</strong> Saffron, Cinnamon<br>
+            <strong>Heart:</strong> Incense, Jasmine<br>
+            <strong>Base:</strong> Leather, Guaiac Wood, Amber
+          </div>
+          <span class="price">$195.00</span>
+          <button class="btn btn-add" data-price="195">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1608248597788-353d243fae6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=85" alt="Amber Dusk perfume bottle">
+        </div>
+        <div class="product-content">
+          <h3 class="product-name">Amber Dusk</h3>
+          <p class="product-desc">Rich amber and tonka with soft iris and vanilla.</p>
+          <div class="notes">
+            <strong>Top:</strong> Bergamot, Mandarin<br>
+            <strong>Heart:</strong> Iris, Jasmine<br>
+            <strong>Base:</strong> Amber, Tonka Bean, Vanilla
+          </div>
+          <span class="price">$175.00</span>
+          <button class="btn btn-add" data-price="175">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <h2 class="section-title">Why Noor</h2>
+
+    <div class="features-grid">
+
+      <div class="feature fade-in">
+        <div class="feature-icon">✦</div>
+        <h3 class="feature-title">Pure Ingredients</h3>
+        <p>Only the rarest essences and highest-grade absolutes</p>
+      </div>
+
+      <div class="feature fade-in">
+        <div class="feature-icon">⏳</div>
+        <h3 class="feature-title">8+ Hours Longevity</h3>
+        <p>Extrait de Parfum concentration for exceptional staying power</p>
+      </div>
+
+      <div class="feature fade-in">
+        <div class="feature-icon">✈️</div>
+        <h3 class="feature-title">Complimentary Shipping</h3>
+        <p>Worldwide on orders over $120 — discreet packaging</p>
+      </div>
+
+      <div class="feature fade-in">
+        <div class="feature-icon">⎯⎯</div>
+        <h3 class="feature-title">Artisanal Batches</h3>
+        <p>Hand-blended in limited quantities for maximum freshness</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <h2 class="section-title">Beloved by Connoisseurs</h2>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial fade-in">
+        <p class="quote">“Midnight Oud has become my signature. Deep, addictive, unforgettable.”</p>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Customer avatar" class="avatar">
+          <div>
+            <div class="author-name">Aariz K.</div>
+            <div style="font-size:0.9rem; color:#888;">Dubai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial fade-in">
+        <p class="quote">“Velvet Rose feels like wearing silk. Elegant and never overpowering.”</p>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Customer avatar" class="avatar">
+          <div>
+            <div class="author-name">Layla M.</div>
+            <div style="font-size:0.9rem; color:#888;">London</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial fade-in">
+        <p class="quote">“Saffron Ember is pure luxury — smoky, warm, and incredibly refined.”</p>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Customer avatar" class="avatar">
+          <div>
+            <div class="author-name">Zayan R.</div>
+            <div style="font-size:0.9rem; color:#888;">New York</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="container fade-in">
+    <h2>Join the Inner Circle</h2>
+    <p>Get 10% off your first order + early access to limited editions and private launches.</p>
+
+    <form class="newsletter-form">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit" class="btn">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="logo" style="font-size:2rem; margin-bottom:1.5rem;">Noor</div>
+
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#products">Shop</a>
+      <a href="#features">Why Noor</a>
+      <a href="#newsletter">Contact</a>
+    </div>
+
+    <div class="social">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+    </div>
+
+    <p style="color:#555; font-size:0.95rem;">
+      Made with ❤️ in Sialkot • © 2026 Noor Fragrances
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Cart counter
+  let cartCount = 0;
+  const cartDisplay = document.getElementById('cart-count');
+  const addButtons = document.querySelectorAll('.btn-add');
+
+  addButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cartCount++;
+      cartDisplay.textContent = cartCount;
+      btn.textContent = "Added ✓";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = "Add to Cart";
+        btn.disabled = false;
+      }, 1800);
+    });
+  });
+
+  // Header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 100);
+  });
+
+  // Simple fade-in on scroll
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeElements.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
